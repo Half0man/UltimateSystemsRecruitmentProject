@@ -1,16 +1,14 @@
 package com.example.ultimatesystemstest;
 
 import lombok.Data;
-
 import javax.persistence.*;
-import javax.persistence.Table;
 import javax.validation.constraints.*;
 import java.util.Set;
 
 @Data
-@Table(name="students")
+@Table(name="teachers")
 @Entity
-public class Student {
+public class Teacher {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private long id;
@@ -34,11 +32,7 @@ public class Student {
     @Column
     @NotEmpty
     @Size(min = 2, message = "students field of study should have at least 2 characters")
-    private String fieldOfStudy;
-    @ManyToMany(mappedBy = "students")
-    private Set<Teacher>teachers;
-
-
-
-
+    private String subject;
+    @ManyToMany
+    private Set<Student> students;
 }
