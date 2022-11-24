@@ -73,7 +73,7 @@ public class TeacherService {
 
     }
     @Transactional
-    public void RemoveAllStudentsFromTeacher(long teacherId){
+    public void removeAllStudentsFromTeacher(long teacherId){
         Teacher teacher= teacherRepository.findById(teacherId);
         teacher.getStudents().forEach(student -> student.getTeachers().remove(teacher));
         studentRepository.saveAll(teacher.getStudents());

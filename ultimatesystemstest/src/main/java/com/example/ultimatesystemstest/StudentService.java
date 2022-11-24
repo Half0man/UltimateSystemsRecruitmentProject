@@ -56,7 +56,7 @@ public class StudentService {
         List<Student> students =studentRepository.searchByName(query);
         return students;
     }
-    public List<Student>searchTeacherBySurname(String query){
+    public List<Student>searchStudentBySurname(String query){
         List<Student> students =studentRepository.searchBySurname(query);
         return students;
     }
@@ -78,14 +78,16 @@ public class StudentService {
         student.getTeachers().remove(teacherRepository.findById(teacherId));
         teacherRepository.save(student);
     }
-    public void crateStudent(Student student){
+    public Student createStudent(Student student){
         studentRepository.save(student);
+        return student;
     }
-    public void modifyStudent(Student student,String name,String surname,int age,String email,String fieldOfStudy){
+    public Student modifyStudent(Student student, String name, String surname, int age, String email, String fieldOfStudy){
         student.setAge(age);
         student.setName(name);
         student.setSurname(surname);
         student.setFieldOfStudy(fieldOfStudy);
         student.setEmail(email);
+        return student;
     }
     }

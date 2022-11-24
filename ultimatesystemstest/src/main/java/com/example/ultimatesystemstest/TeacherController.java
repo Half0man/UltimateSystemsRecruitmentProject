@@ -22,9 +22,11 @@ public class TeacherController {
     public ResponseEntity<List<Teacher>> searchBySurname(@RequestParam("query")String query){
         return ResponseEntity.ok(teacherService.searchTeacherBySurname(query));
     }
+    @GetMapping("/createTeacher")
     public Teacher createTeacher(@Valid @RequestBody Teacher teacher){
         return teacherService.createTeacher(teacher);
     }
+    @GetMapping("/modifyTeacher")
     public Teacher modifyTeacher(@Valid Teacher teacher,String name,String surname,int age,String email,String subject ){
         return teacherService.modifyTeacher(teacher,name,surname,age,email,subject);
     }
@@ -46,5 +48,17 @@ public class TeacherController {
         List<Teacher> list = teacherService.getAllTeachersSorted(sortBy);
         return new ResponseEntity<>(list,new HttpHeaders(), HttpStatus.OK);
     }
-    public void deleteTeacher
+    @GetMapping("/deleteTeacher")
+    public void deleteTeacher(@RequestParam("id") long id){
+        teacherService.deleteTeacher(id);
+    }
+    @GetMapping("/removeAllStudentsFromTeacher")
+    public void removeAllStudentsFromTeacher(@RequestParam("id") long id){
+        teacherService.removeAllStudentsFromTeacher(id);
+    }
+    @GetMapping("/removeStudentFromTeacher")
+    public void removeStudentFromTeacher(@RequestParam("teacherId") long teacherId,@RequestParam("studentId") long studentId){
+        teacherService.removeStudentFromTeacher(teacherId,studentId);
+    }
+
 }
