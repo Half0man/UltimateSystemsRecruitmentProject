@@ -60,8 +60,9 @@ public class TeacherService {
         List<Teacher> teachers =teacherRepository.searchBySurname(query);
         return teachers;
     }
-    public void createTeacher(Teacher teacher){
+    public Teacher createTeacher(Teacher teacher){
         teacherRepository.save(teacher);
+        return teacher;
     }
     @Transactional
     public void deleteTeacher(long teacherId){
@@ -90,11 +91,12 @@ public class TeacherService {
         teacher.getStudents().add(studentRepository.findById(studentId));
         teacherRepository.save(teacher);
     }
-    public void modifyTeacher(Teacher teacher,String name,String surname,int age,String email,String subject){
+    public Teacher modifyTeacher(Teacher teacher, String name, String surname, int age, String email, String subject){
         teacher.setAge(age);
         teacher.setName(name);
         teacher.setSurname(surname);
         teacher.setSubject(subject);
         teacher.setEmail(email);
+        return teacher;
     }
 }
